@@ -1,0 +1,20 @@
+{
+    "rewrites": [
+        {
+            "source": "/api/proxy/cinemahub",
+            "destination": "https://bot.cinemahub.biz/status"
+        },
+        {
+            "source": "/api/proxy/streamdrop",
+            "destination": "https://streamdrop.site/api/status"
+        },
+        {
+            "source": "/api/proxy/sharebox",
+            "destination": "https://sharebox.buzz/api/status"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/index.html"
+        }
+    ]
+}

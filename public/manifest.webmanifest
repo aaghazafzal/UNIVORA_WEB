@@ -1,0 +1,21 @@
+{
+  "name": "Univora",
+  "short_name": "Univora",
+  "description": "The Central Digital Intelligence Hub for Apps, Bots & AI",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#ff6600",
+  "icons": [
+    {
+      "src": "/logos/png-logos/univora.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logos/png-logos/univora.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
