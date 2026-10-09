@@ -1,4 +1,6 @@
 import { NextResponse } from 'next/server';
+import crypto from 'crypto';
+import clientPromise from '../../../lib/mongodb';
 
 export async function POST(req: Request) {
     try {
@@ -44,11 +46,8 @@ export async function POST(req: Request) {
             });
         } else if (text === '/adminpanel') {
             // Generate a secure one-time token
-            const crypto = require('crypto');
             const token = crypto.randomUUID();
             
-            // Import dynamically or at top. We will just use standard DB connection
-            const clientPromise = require('../../../lib/mongodb').default;
             const client = await clientPromise;
             const db = client.db('univora');
             
