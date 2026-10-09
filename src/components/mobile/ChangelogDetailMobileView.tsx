@@ -23,7 +23,7 @@ export default function ChangelogDetailMobileView({ log }: { log: Log }) {
     const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
     const formattedDate = `${dateObj.getDate()} ${months[dateObj.getMonth()]} ${dateObj.getFullYear()}`;
     
-    let formattedUpdate = null;
+    let formattedUpdate: string | null = null;
     if (log.updatedAt) {
         const upDate = new Date(log.updatedAt);
         formattedUpdate = `${upDate.getDate()} ${months[upDate.getMonth()]} ${upDate.getFullYear()}`;

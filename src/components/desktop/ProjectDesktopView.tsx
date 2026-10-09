@@ -30,7 +30,7 @@ export default function ProjectDesktopView({ project }: { project: any }) {
     const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
     // Gather images for the gallery
-    const rawImages = [];
+    const rawImages: any[] = [];
     if (project.laptopScreenshots && project.laptopScreenshots.length > 0) {
         rawImages.push(...project.laptopScreenshots);
     }

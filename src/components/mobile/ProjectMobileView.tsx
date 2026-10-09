@@ -21,7 +21,7 @@ export default function ProjectMobileView({ project }: { project: any }) {
     }, []);
     
     // Gather images for the gallery
-    const rawImages = [];
+    const rawImages: any[] = [];
     if (project.mobileScreenshots && project.mobileScreenshots.length > 0) {
         rawImages.push(...project.mobileScreenshots);
     }

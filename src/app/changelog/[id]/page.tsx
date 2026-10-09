@@ -10,7 +10,7 @@ export const revalidate = 60;
 
 export default async function ChangelogDetailPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
-    let log = null;
+    let log: any = null;
 
     try {
         const client = await clientPromise;

@@ -8,7 +8,7 @@ import Footer from '../../components/Footer';
 export const revalidate = 60; 
 
 export default async function ChangelogPage() {
-    let logs = [];
+    let logs: any[] = [];
     
     try {
         const client = await clientPromise;

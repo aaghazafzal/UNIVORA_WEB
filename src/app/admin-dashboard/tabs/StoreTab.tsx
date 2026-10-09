@@ -25,7 +25,7 @@ export default function StoreTab() {
         }
     };
 
-    const handleSave = async (itemId: string, type: 'price' | 'url', value: string) => {
+    const handleSave = async (itemId: string, type: 'price' | 'original_price' | 'url', value: string) => {
         const key = `store_${type}_${itemId}`;
         const mapKey = `${itemId}_${type}`;
         

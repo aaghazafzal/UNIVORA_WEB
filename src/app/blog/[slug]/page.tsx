@@ -8,7 +8,7 @@ import BlogDetailMobileView from '../../../components/mobile/BlogDetailMobileVie
 export const revalidate = 60; // Standard ISR
 
 export default async function BlogDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-    let post = null;
+    let post: any = null;
 
     try {
         const { slug } = await params;
