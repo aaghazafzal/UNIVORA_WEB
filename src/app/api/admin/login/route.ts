@@ -13,21 +13,16 @@ export async function GET(req: Request) {
         const client = await clientPromise;
         const db = client.db('univora');
         
-        // Find the valid unused token
+        // Find the valid token (within 10 minutes of creation)
+        const tenMinutesAgo = new Date(Date.now() - 10 * 60 * 1000);
         const session = await db.collection('admin_sessions').findOne({ 
             token: token,
-            used: false
+            createdAt: { $gte: tenMinutesAgo }
         });
 
         if (!session) {
             return NextResponse.redirect(new URL('/not-found', req.url));
         }
-
-        // Mark it as used so it can't be reused by others
-        await db.collection('admin_sessions').updateOne(
-            { _id: session._id },
-            { $set: { used: true } }
-        );
 
         // Generate a persistent access token (could be the same token, but we flag it as an active session now)
         const activeToken = token; 

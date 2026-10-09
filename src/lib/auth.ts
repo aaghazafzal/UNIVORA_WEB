@@ -12,8 +12,7 @@ export async function verifyAdmin() {
         const db = client.db('univora');
         
         const session = await db.collection('admin_sessions').findOne({ 
-            token: token,
-            used: true 
+            token: token
         });
 
         return !!session;
