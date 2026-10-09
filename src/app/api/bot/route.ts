@@ -37,8 +37,9 @@ export async function POST(req: Request) {
                         inline_keyboard: [
                             [
                                 {
-                                    text: '🔵 Explore Univora Hub',
-                                    url: SITE_URL
+                                    text: 'Explore Univora Hub',
+                                    url: SITE_URL,
+                                    style: 'primary'
                                 }
                             ]
                         ]
@@ -46,18 +47,10 @@ export async function POST(req: Request) {
                 }),
             });
         } else if (text === '/adminpanel') {
-            // SECURITY CHECK: Only allow the Admin to generate the access link
+            // SECURITY CHECK: Only allow the Admin to generate the access link. 
+            // Silently ignore others so they don't even suspect it exists.
             if (String(userId) !== ADMIN_ID) {
-                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: chatId,
-                        text: '⛔ **ACCESS DENIED**\n\nUnauthorized terminal access attempt logged.',
-                        parse_mode: 'Markdown'
-                    }),
-                });
-                return NextResponse.json({ status: 'forbidden' });
+                return NextResponse.json({ status: 'ok' }); // Return 'ok' to prevent Telegram from retrying, but do nothing
             }
 
             // Generate a secure one-time token
@@ -86,8 +79,9 @@ export async function POST(req: Request) {
                         inline_keyboard: [
                             [
                                 {
-                                    text: '🟢 OPEN ADMIN VAULT',
-                                    url: secureUrl
+                                    text: 'OPEN ADMIN VAULT',
+                                    url: secureUrl,
+                                    style: 'success'
                                 }
                             ]
                         ]
@@ -95,14 +89,18 @@ export async function POST(req: Request) {
                 }),
             });
         } else {
-            await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: chatId,
-                    text: 'Command not recognized. Use /start to see the main menu.',
-                }),
-            });
+            // Only reply to unknown commands if it's the admin, or just ignore for everyone to be less spammy?
+            // Let's reply so they know the bot is alive.
+            if (String(userId) === ADMIN_ID) {
+                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: 'Command not recognized. Use /start to see the main menu.',
+                    }),
+                });
+            }
         }
 
         return NextResponse.json({ status: 'ok' });
