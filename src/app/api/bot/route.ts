@@ -18,7 +18,9 @@ export async function POST(req: Request) {
 
         const ADMIN_ID = process.env.ADMIN_TELEGRAM_ID;
         const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-        const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://univora.vercel.app'; // Replace with actual vercel domain later
+        const host = req.headers.get('host') || 'www.univora.site';
+        const protocol = host.includes('localhost') ? 'http' : 'https';
+        const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || `${protocol}://${host}`;
 
         // SECURITY CHECK: Only allow the Admin to interact with the bot
         if (String(userId) !== ADMIN_ID) {
