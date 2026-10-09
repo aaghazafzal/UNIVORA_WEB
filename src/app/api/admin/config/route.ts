@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import clientPromise from '../../../../lib/mongodb';
+import { verifyAdmin } from '../../../../lib/auth';
 
 // GET all configs
 export async function GET() {
@@ -24,6 +25,7 @@ export async function GET() {
 
 // POST: Upsert a single config value
 export async function POST(req: Request) {
+    if (!(await verifyAdmin())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     try {
         const { key, value } = await req.json();
 

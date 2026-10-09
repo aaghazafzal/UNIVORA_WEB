@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import clientPromise from '../../../../lib/mongodb';
 import { ObjectId } from 'mongodb';
+import { verifyAdmin } from '../../../../lib/auth';
 
 export async function GET() {
     try {
@@ -15,6 +16,7 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+    if (!(await verifyAdmin())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     try {
         const body = await req.json();
         const client = await clientPromise;
@@ -44,6 +46,7 @@ export async function POST(req: Request) {
 }
 
 export async function PUT(req: Request) {
+    if (!(await verifyAdmin())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     try {
         const body = await req.json();
         const { id, ...updateFields } = body;
@@ -68,6 +71,7 @@ export async function PUT(req: Request) {
 }
 
 export async function DELETE(req: Request) {
+    if (!(await verifyAdmin())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     try {
         const { id } = await req.json();
         if (!id) return NextResponse.json({ error: 'Missing id' }, { status: 400 });

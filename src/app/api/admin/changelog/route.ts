@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import clientPromise from '../../../../lib/mongodb';
 import { ObjectId } from 'mongodb';
+import { verifyAdmin } from '../../../../lib/auth';
 
 // GET all changelogs
 export async function GET() {
@@ -17,6 +18,7 @@ export async function GET() {
 
 // POST a new changelog
 export async function POST(req: Request) {
+    if (!(await verifyAdmin())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     try {
         const body = await req.json();
         const client = await clientPromise;
@@ -45,6 +47,7 @@ export async function POST(req: Request) {
 
 // PUT to edit an existing changelog
 export async function PUT(req: Request) {
+    if (!(await verifyAdmin())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     try {
         const body = await req.json();
         const { id, ...updateFields } = body;
@@ -68,6 +71,7 @@ export async function PUT(req: Request) {
 
 // DELETE a changelog
 export async function DELETE(req: Request) {
+    if (!(await verifyAdmin())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     try {
         const { id } = await req.json();
 

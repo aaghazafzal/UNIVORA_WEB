@@ -38,14 +38,42 @@ export async function POST(req: Request) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     chat_id: chatId,
-                    text: '⚡ **UNIVORA COMMAND CENTER** ⚡\n\nIdentity verified. Access your Vault below:',
+                    text: '⚡ **UNIVORA COMMAND CENTER** ⚡\n\nIdentity verified. Type /adminpanel to generate a secure one-time access link for your browser.',
+                    parse_mode: 'Markdown',
+                }),
+            });
+        } else if (text === '/adminpanel') {
+            // Generate a secure one-time token
+            const crypto = require('crypto');
+            const token = crypto.randomUUID();
+            
+            // Import dynamically or at top. We will just use standard DB connection
+            const clientPromise = require('../../../lib/mongodb').default;
+            const client = await clientPromise;
+            const db = client.db('univora');
+            
+            // Save token to DB with an expiration date (e.g. valid for 15 mins)
+            await db.collection('admin_sessions').insertOne({
+                token: token,
+                createdAt: new Date(),
+                used: false
+            });
+
+            const secureUrl = `${SITE_URL}/api/admin/login?token=${token}`;
+
+            await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: `🔐 **SECURE ACCESS LINK GENERATED**\n\nClick the link below to securely access the Univora Admin Panel in your browser. This link is for single use.\n\n🔗 ${secureUrl}`,
                     parse_mode: 'Markdown',
                     reply_markup: {
                         inline_keyboard: [
                             [
                                 {
                                     text: '🚀 OPEN ADMIN VAULT',
-                                    web_app: { url: `${SITE_URL}/admin-dashboard` }
+                                    url: secureUrl
                                 }
                             ]
                         ]
