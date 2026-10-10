@@ -117,6 +117,31 @@ export default function EcosystemMobile() {
                         </div>
                     </motion.div>
                 )})}
+
+                {/* Directory Navigation Buttons */}
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.8, delay: displayProjects.length * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                    className="grid grid-cols-2 gap-4 w-full mt-2"
+                >
+                    <Link href="/apps" className="relative z-10 doppelrand-outer p-1 rounded-full bg-transparent hover:scale-[0.98] transition-awwwards w-full group">
+                        <div className="h-full w-full rounded-full py-3.5 bg-theme-text border border-theme-text text-theme-bg flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-[9px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)] hover:bg-theme-primary hover:border-theme-primary transition-colors">
+                            Apps Directory
+                            <div className="w-4 h-4 rounded-full bg-theme-bg/20 flex items-center justify-center transition-awwwards group-hover:translate-x-1 group-hover:-translate-y-[1px]">
+                                <ArrowUpRight size={8} className="text-theme-bg" />
+                            </div>
+                        </div>
+                    </Link>
+                    <Link href="/bots" className="relative z-10 doppelrand-outer p-1 rounded-full bg-transparent hover:scale-[0.98] transition-awwwards w-full group">
+                        <div className="h-full w-full rounded-full py-3.5 bg-theme-text border border-theme-text text-theme-bg flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-[9px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)] hover:bg-theme-primary hover:border-theme-primary transition-colors">
+                            Bots Directory
+                            <div className="w-4 h-4 rounded-full bg-theme-bg/20 flex items-center justify-center transition-awwwards group-hover:translate-x-1 group-hover:-translate-y-[1px]">
+                                <ArrowUpRight size={8} className="text-theme-bg" />
+                            </div>
+                        </div>
+                    </Link>
+                </motion.div>
             </div>
         </section>
     );
