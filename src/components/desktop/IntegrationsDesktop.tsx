@@ -26,16 +26,6 @@ export default function IntegrationsDesktop() {
     return (
         <section className="py-32 overflow-hidden relative">
             <div className="max-w-[1400px] mx-auto px-8 lg:px-20 mb-16 text-center">
-                <motion.div 
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    className="inline-block px-3 py-1 rounded-full bg-theme-text/5 border border-theme-border text-[10px] uppercase tracking-[0.2em] font-medium text-theme-text mb-6"
-                >
-                    Infrastructure
-                </motion.div>
-                
                 <motion.h2 
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}

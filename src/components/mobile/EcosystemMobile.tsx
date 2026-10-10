@@ -43,7 +43,7 @@ export default function EcosystemMobile() {
         : defaultIds.map(id => detailsData.find(item => item.id === id)).filter(Boolean).slice(0, 4);
 
     return (
-        <section id="apps" className="py-20 relative">
+        <section id="apps" className="pt-20 pb-4 relative">
             <div className="px-6 mb-12">
                 <div className="overflow-hidden mb-4">
                     <motion.div 
@@ -126,7 +126,7 @@ export default function EcosystemMobile() {
                     className="grid grid-cols-2 gap-4 w-full mt-2"
                 >
                     <Link href="/apps" className="relative z-10 doppelrand-outer p-1 rounded-full bg-transparent hover:scale-[0.98] transition-awwwards w-full group">
-                        <div className="h-full w-full rounded-full py-3.5 bg-theme-text border border-theme-text text-theme-bg flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-[9px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)] hover:bg-theme-primary hover:border-theme-primary transition-colors">
+                        <div className="h-full w-full rounded-full py-3.5 bg-theme-primary border border-theme-primary text-theme-bg flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-[9px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)] hover:opacity-90 transition-opacity">
                             Apps Directory
                             <div className="w-4 h-4 rounded-full bg-theme-bg/20 flex items-center justify-center transition-awwwards group-hover:translate-x-1 group-hover:-translate-y-[1px]">
                                 <ArrowUpRight size={8} className="text-theme-bg" />
@@ -134,7 +134,7 @@ export default function EcosystemMobile() {
                         </div>
                     </Link>
                     <Link href="/bots" className="relative z-10 doppelrand-outer p-1 rounded-full bg-transparent hover:scale-[0.98] transition-awwwards w-full group">
-                        <div className="h-full w-full rounded-full py-3.5 bg-theme-text border border-theme-text text-theme-bg flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-[9px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)] hover:bg-theme-primary hover:border-theme-primary transition-colors">
+                        <div className="h-full w-full rounded-full py-3.5 bg-theme-primary border border-theme-primary text-theme-bg flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-[9px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)] hover:opacity-90 transition-opacity">
                             Bots Directory
                             <div className="w-4 h-4 rounded-full bg-theme-bg/20 flex items-center justify-center transition-awwwards group-hover:translate-x-1 group-hover:-translate-y-[1px]">
                                 <ArrowUpRight size={8} className="text-theme-bg" />
