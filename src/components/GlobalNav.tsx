@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
-import { Home, Grid, Bot, ShoppingBag, Code, FileText, Activity, Menu, X, LifeBuoy, Newspaper } from 'lucide-react';
+import { Home, Grid, Bot, ShoppingBag, Code, FileText, Activity, Menu, X, LifeBuoy, Newspaper, User } from 'lucide-react';
 
 const NAV_ITEMS = [
     { name: 'Hub', path: '/', icon: Home },
@@ -15,6 +15,7 @@ const NAV_ITEMS = [
     { name: 'Docs', path: '/docs', icon: FileText },
     { name: 'Blog', path: '/blog', icon: Newspaper },
     { name: 'Support', path: '/support', icon: LifeBuoy },
+    { name: 'Login', path: '/auth', icon: User },
 ];
 
 export default function GlobalNav() {
